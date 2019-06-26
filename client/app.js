@@ -1,5 +1,4 @@
-const server = 'http://31.14.131.42:3111';
-// const server = 'http://localhost:3111';
+const server = 'http://localhost:3111';
 
 
 // first component
