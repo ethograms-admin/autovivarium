@@ -2,8 +2,7 @@ import requests
 import cv2
 import base64
 
-# url = 'http://31.14.131.42:3111/api/frames/post'
-url = 'http://31.14.131.42:3111/api/frames/post'
+url = 'http://localhost:3111/api/frames/post'
 webcam = cv2.VideoCapture(0)
 
 if not webcam.isOpened():

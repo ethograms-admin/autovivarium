@@ -4,15 +4,6 @@ module.exports = {
         var message = '<h3>----- ALERT MESSAGE CONCERNING VIVARIUM SERVER ID: '+ g.config.vivariumName +'</h3>';  
         var send = true;
 
-        // console.log('humidity:' + log.humidity);
-        // console.log('humidity high threshold:' + config.humidityAlertAbove);
-        // console.log('humidity low threshold:' + config.humidityAlertBelow);
-        // console.log('temperature:' + log.temperature);
-        // console.log('temperature high threshold:' + config.temperatureAlertAbove);
-        // console.log('temperature low threshold:' + config.temperatureAlertBelow);
-        // console.log('water:' + log.waterReserve);
-        // console.log('water threshold:' + config.waterReserveAlertBelow);
-
         if (log.humidity <= config.humidityAlertAbove && log.humidity >= config.humidityAlertBelow &&
             log.temperature <= config.temperatureAlertAbove && log.temperature >= config.temperatureAlertBelow &&
             log.waterReserve >= config.waterReserveAlertBelow)

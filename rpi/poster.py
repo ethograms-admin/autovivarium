@@ -1,7 +1,6 @@
 import requests
 import Adafruit_DHT as dht
 
-# url = 'http://31.14.131.42:3111/api/logs/post'
 url = 'http://localhost:3111/api/logs/post'
 pin = 4
 
