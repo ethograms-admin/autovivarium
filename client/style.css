@@ -1,0 +1,119 @@
+pre {
+    color: #fff;
+    background-color:#000;
+    margin: 0px;
+    padding: 20px;
+
+    /* width: 800px; */
+}
+
+hr {
+  /* width:838px;
+  margin:20px 0px 0px 0px; */
+}
+
+p {
+    width: 800px !important;
+    text-align: justify;
+
+    color: #4d4d4d;
+}
+
+li {
+    color: #4d4d4d;
+}
+
+#linechart-canvas {
+    margin-bottom: 20px;
+}
+
+.blue {
+    color:blue;
+}
+
+.red {
+    color:red;
+}
+
+.green {
+  color:#8dc3be;
+  font-weight: bold;
+}
+.violet {
+  color:red;
+  font-weight: bold;
+}
+
+.readings-table {
+    display: table;         
+    width: auto;         
+    color: #4d4d4d;
+  }
+  .table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+  }
+  .table-column {
+    border-bottom: 1px solid;
+    padding: 10px;
+
+    float: left;
+    display: table-column;         
+    width: 200px;         
+  }
+
+  textarea {
+      width: 800px;
+      resize: none;
+  }
+
+  .pro-tip {
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  .boxed {
+    border: 1px solid;
+    padding: 10px;
+  }
+
+
+
+  .hidden {
+    display: none;
+  }
+
+
+  table, th, td {
+    border: 1px solid;
+    padding: 10px;
+  }
+
+  td {
+    max-width: 500px;
+  }
+
+  .hardware-header {
+    background-color:black;
+    color:white;
+  }
+
+  .medium-header {
+    background-color:brown;
+    color:white;
+  }
+  
+  .plants-header {
+    background-color:green;
+    color:white;
+  }
+    
+  .programming-header {
+    background-color:rgb(95, 169, 214);
+    color:white;
+  }
+
+  .borderless {
+    border: none;
+  }

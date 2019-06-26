@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>autovivarium</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+
+    <body>
+
+        <pre>
+             _                                                         
+            | |                                            
+  __ _ _   _| |_ _____   _____   ____ _ _ __ _ _   _ _ __ ___   
+ / _` | | | | __/ _ \ \ / / \ \ / / _` | '__| | | | | '_ ` _ \  
+| (_| | |_| | || (_) \ | /| |\ | / (_| | |  | | |_| | | | | | | 
+ \__,_|\__,_|\__\___/ \_/ |_| \_/ \__,_|_|  |_|\__,_|_| |_| |_|.SITE
+
+        </pre>
+
+        <hr>
+
+        <h3>intro</h3>
+        <p>
+            autovivarium site is a project to automate the needs and maintenance of a population of 
+            <i>Dionaea muscipula</i> (and possibly other latin names too).
+        </p>
+
+        <h3>description</h3>
+
+        <p> 
+            the autovivarium currently consists of a single-board computer connected to a humidity/temperature sensor 
+            that reads the vivarium temperature and humidity every 5 minutes. A webcam is also connected and programmed
+            to take a shot at the minute 30 of every hour. All the data is then sent to a server that stores 
+            the information in a database.
+        </p>
+        <p>there's also a computer fan connected to a potentiometer to manually adjust the air velocity of the vivarium.</p>
+
+        <h3>methods and materials</h3>
+
+        <p>
+            the autovivarium site is made of three main parts:
+        </p>
+
+            <ul>
+                <li>single-board computer = a raspberry pi</li>
+                <li>server = a nodejs application using express middleware</li>
+                <li>client = this .html file, a .js file and a .css file</li>
+            </ul> 
+        <p>
+            the raspberry pi has a raspbian linux distribution with a python script that uses the fourth GPIO pin on the raspberry 
+            to read data from the dht11 sensor and send it to the nodejs application. The nodejs server stores the data as .json files in a 
+            folder. Those .json files are later requested by the client application and displayed in the chart below. The raspberry pi
+            is set to run the python script every 5 minutes thanks to a cronjob.
+        </p>
+        <p>
+            code and connections can be found <a href="#">here</a>.
+        </p>
+
+        <hr>
+
+        <h3>temperature/humidity logs (last recorded data)</h3>
+        <div>
+            <span class="blue">humidity: RH%</span>  <span class="green">|||| = peaks</span>
+        </div>
+        <div>    
+            <canvas id="humidity-linechart-canvas" width="950" height="200"></canvas>
+        </div>
+        <br>
+
+        <div>
+            <span class="red">temperature: *C</span> <span class="green">|||| = peaks</span>
+        </div>
+        
+        <div>
+            <canvas id="temperature-linechart-canvas" width="950" height="200"></canvas>
+        </div>
+
+        <div id="readings" class="readings-table">
+            {{ rows }}
+        </div>
+        <a id="expand-link" href="#readings" onclick="expandReadings()">expand all</a>
+
+        <br>
+        <br>
+        <hr>
+
+        <h3>webcam feed</h3>
+
+        <div class="webcam-feed">
+             {{ base64inImgTag }}
+        </div>
+
+        <h3>vivarium setup pictures</h3>
+
+        <img src="assets/vivsetup1.jpg" height="200" width="200">
+        <img src="assets/vivsetup2.jpg" height="200" width="200">
+        <img src="assets/vivsetup3.jpg" height="200" width="200">
+		<img src="assets/vivsetup4.jpg" height="200" width="200">
+        <img src="assets/vivsetup5.jpg" height="200" width="200">
+
+        <h3>shop list (prices in pln)</h3>
+
+        <p>
+            probably it can be done for less and with infinite hardware/software/medium configurations but this is 
+            the way that seemed more convenient for me. Also prices and licenses were checked in 2019. If 
+            some information is outdated, please <a href="#conclusions">submit a ticket</a>.
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>thing</th>
+                <th>price</th>
+                <th>notes</th>
+            </tr>
+            <tr>
+                <td class="hardware-header">hardware</td>
+            </tr>
+            <tr>
+                <td>raspberry pi zero w</td>
+                <td>52zl</td>
+                <td>other raspberry pi models should work the same.</td>
+            </tr>
+            <tr>
+                <td>metal enclosure for raspberry pi zero</td>
+                <td>33zl</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>50l plastic container</td>
+                <td>15zl</td>
+                <td>with enough vertical space for root development and transparent, not dark, otherwise too much absorbed heat will kill the roots.</td>
+            </tr>
+            <tr>
+                <td>jumper cables</td>
+                <td>10zl</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>dht11 humidity and temperature sensor</td>
+                <td>7.90zl</td>
+                <td>temperature range: -20°C to +60°C, humidity range: 5%-95% RH. If there's no resistor in the sensor board, a 4.7K resistor is needed between signal and +.</td>
+            </tr>
+            <tr>
+                <td class="medium-header">medium</td>
+            </tr>
+            <tr>
+                <td>sphagnum moss 4.5l x 3</td>
+                <td>48.97zl</td>
+                <td>for venus flytraps <span class="red"> it must not </span> contain any additional nutrients.</td>
+            </tr>
+            <tr>
+                <td>perlite 1l x 2</td>
+                <td>19.20zl</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>rainwater</td>
+                <td>"open-source"</td>
+                <td>
+                    distilled water can be used too but used kilowatts for distillation process (and possibly glassware cost 
+                    or adquisition of adequate home homologues) should be accounted for.
+                </td>
+            </tr>
+            <tr>
+                <td class="plants-header">plants</td>
+            </tr>
+            <tr>
+                <td>mature venus flytrap x 2</td>
+                <td>54zl</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="programming-header">external software libraries</td>
+            </tr>
+            <tr>
+                <td>python requests library</td>
+                <td>open-source</td>
+                <td>apache license 2.0 (apache-2.0)</td>
+            </tr>
+            <tr>
+                <td>python opencv library</td>
+                <td>open-source</td>
+                <td>3-clause BSD license</td>
+            </tr>
+            <tr>
+                <td>python adafruit_dht library</td>
+                <td>open-source</td>
+                <td>MIT license</td>
+            </tr>
+            <tr>
+                <td>nodejs library</td>
+                <td>open-source</td>
+                <td>MIT license</td>
+            </tr>
+            <tr>
+                <td>expressjs library</td>
+                <td>open-source</td>
+                <td>MIT license</td>
+            </tr>
+            
+            
+            <tr>
+                <td class="borderless"></td>
+                <th>total = 240.07zl</th>
+                <td class="borderless"></td>
+            </tr>
+            <tr>
+                <td class="borderless"></td>
+                <th>$62.58 <sup>(28th may 2019)</sup></th>
+                <td class="borderless"></td>
+            </tr>
+        </table> 
+
+      
+        <h3>cool-things-to-do list</h3>
+        <ul>
+            <li>add filtering by hour/day <sup class="violet">[next up]</sup> </li>
+            <li>refactor client into some sort of component architecture and services<sup class="violet">[next up]</sup> </li></li>
+            <li>display free disk space in database</li>
+            <li>add condition to webcam capturer: if it's night/dark, don't take/save the picture</li>
+            <li>add a computer-controlled CO2 sensor to log CO2 levels</li>
+            <li>add a computer-controlled pH meter to log soil pH levels</li>
+            <li>add computer-controlled water atomizers that fire when humidity is too low</li>
+            <li>add a rain water reserve with an ultrasonic sensor to also log current water capacity</li>
+            <li>add an ant colony</li>
+            <li>add an image classifier that can tell whether ant concentration is high or low</li>
+            <li>add a servo to temporarily open a gate from the ant colony to the venus flytraps container if ant concentration is high</li>
+            <li>add a drone compartment subunit with little flying drones that use computer vision to locate dead leaves and burn them with a tiny flamethrower</li>
+            <li>connect the computer fan to the computer to adjust its velocity depending on temperature/humidity values</li>
+            <li>if this list becomes unmanageable through html, store them too in the database to be sorted by status</li>
+            <li><s> add numeric values to chart </s> <sup class="green">[done]</sup> </li>
+            <li><s>add webcam feed </s> <sup class="green">[done]</sup> </li>
+        </ul>
+
+        <h3>conclusions</h3>  
+        
+        <div id="conclusions" class="conclusions-table">
+            {{ rows }}
+        </div>
+
+        <h3>sources</h3>
+        <ul>
+            <li><a target="_blank" href="https://www.raspberrypi.org/documentation/">raspberry pi</a></li>
+            <li><a target="_blank" href="https://nodejs.org/en/docs/">nodejs</a></li>
+            <li><a target="_blank" href="https://github.com/adafruit/Adafruit_Python_DHT">adafruit_dht</a></li>
+            <li><a target="_blank" href="https://expressjs.com/en/4x/api.html">express</a></li>
+            <li><a target="_blank" href="http://es6-features.org/#Constants">ecmascript6</a></li>
+            <li><a target="_blank" href="https://github.com/w3c/html/">html5</a></li>
+        </ul>
+
+        <hr>
+        <footer>rolling around since <i>010110-0101-011111100011</i></footer>
+        
+    </body>
+
+    <script type="text/javascript" src="app.js"></script>
+
+</html>
